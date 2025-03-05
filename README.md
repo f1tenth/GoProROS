@@ -17,3 +17,34 @@ To run the GoPro as a standard webcam (i.e with zoom/opencv) you can run `ffmpeg
 With this in place, we can proceed to running the ROS node for publishing the images from the GoPro. Be sure to not be using the GoPro in any other software (zoom/opencv/meets/etc...). 
 
 #### ROS GoPro Package 
+#### Adding the Package to Your Workspace and Building It
+
+First, add the GoProROS package to your workspace:
+
+```bash
+cd ~/your_workspace/src
+git clone https://github.com/your_username/GoProROS.git
+```
+
+Then, build the package using colcon:
+
+```bash
+cd ~/your_workspace
+colcon build --packages-select GoProROS
+```
+
+#### Running the GoPro Node
+Source your workspace and run the GoPro node:
+
+```bash
+source ~/your_workspace/install/setup.bash
+ros2 run gopro_ros gopro_ros
+```
+
+Make sure you have the GoPro running in webcam mode before running the node. The node will publish the images from the GoPro to the `/gopro/image_raw` topic. You can view the images using the `rqt_image_view` tool:
+
+```bash
+ros2 run rqt_image_view rqt_image_view
+```
+
+Alternatively, you can visualize this topic in rviz2.
